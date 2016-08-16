@@ -10,6 +10,8 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 vendor_dir=$build_dir/vendor
 JRE_ARHIVE=jre-8u102-ea-bin-b04-linux-x64-25_apr_2016.tar.gz
 JRE_ARHIVE_FILE=$bp_dir/files/$JRE_ARHIVE
+MAVEN_CONFIG_FILE=$bp_dir/files/hudson.tasks.Maven.xml
+MAVEN_CONFIG_DEST=/home/vcap/.jenkins/hudson.tasks.Maven.xml
 
 # CF Common
 BUILDPACK_PATH=$bp_dir
@@ -34,6 +36,11 @@ popd
 status "Repacking jenkins.war."
 pushd $build_dir
   zip -q -r jenkins.war * -x "vendor/*"
+popd
+
+status "Copy Maven config"
+pushd $build_dir
+  cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
 popd
 
 # Update the PATH
