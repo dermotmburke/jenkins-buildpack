@@ -45,6 +45,8 @@ mkdir -p $JENKINS_HOME
 status "Copy Maven config file $MAVEN_CONFIG_FILE to $MAVEN_CONFIG_DEST"
 cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
 
+ls $JENKINS_HOME
+
 # Update the PATH
 status "Building runtime environment."
 # see this script
