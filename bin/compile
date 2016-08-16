@@ -39,15 +39,11 @@ pushd $build_dir
   zip -q -r jenkins.war * -x "vendor/*"
 popd
 
-status "Create Jenkins home"
-pushd $build_dir
-  mkdir -p $JENKINS_HOME
-popd
+status "Create Jenkins home $JENKINS_HOME"
+mkdir -p $JENKINS_HOME
 
-status "Copy Maven config"
-pushd $build_dir
-  cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
-popd
+status "Copy Maven config file $MAVEN_CONFIG_FILE to $MAVEN_CONFIG_DEST"
+cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
 
 # Update the PATH
 status "Building runtime environment."
