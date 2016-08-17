@@ -8,7 +8,7 @@ source $bp_dir/bin/common.sh
 
 FILES_DIR=$bp_dir/files
 
-TOOLS_HOME=/home/vcap/tools
+TOOLS_HOME=$HOME/tools
 
 JENKINS_HOME=/home/vcap/.jenkins
 
