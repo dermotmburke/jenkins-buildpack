@@ -41,9 +41,9 @@ pushd $vendor_dir
   mv $JRE_DIR jre
 popd
 
-status "Repacking jenkins.war."
+status "Repacking jenkins.zip."
 pushd $build_dir
-  zip -q -r jenkins.war * -x "vendor/*"
+  zip -q -r jenkins.zip * -x "vendor/*"
 popd
 
 status "Create Jenkins home $JENKINS_HOME and set JENKINS_HOME env var"
