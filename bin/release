@@ -23,5 +23,5 @@ cat << EOF
 addons: []
 config_vars: []
 default_process_types:
-  web: unzip jenkins.zip && cp config/$MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST && java -jar app/jenkins.war --httpPort=\$PORT
+  web: unzip -o jenkins.zip && cp config/$MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST && java -jar app/jenkins.war --httpPort=\$PORT
 EOF
