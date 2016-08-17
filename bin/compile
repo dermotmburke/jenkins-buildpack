@@ -11,16 +11,6 @@ vendor_dir=$build_dir/vendor
 JRE_ARHIVE=jre-8u102-ea-bin-b04-linux-x64-25_apr_2016.tar.gz
 JRE_ARHIVE_FILE=$bp_dir/files/$JRE_ARHIVE
 
-FILES_DIR=$bp_dir/files
-
-JENKINS_HOME=/home/vcap/.jenkins
-
-TOOLS_HOME=$HOME/tools
-
-MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
-MAVEN_CONFIG_SOURCE=$FILES_DIR/$MAVEN_CONFIG_FILE
-MAVEN_CONFIG_DEST=$TOOLS_HOME/$MAVEN_CONFIG_FILE
-
 # CF Common
 BUILDPACK_PATH=$bp_dir
 export BUILDPACK_PATH
@@ -46,17 +36,6 @@ pushd $build_dir
   zip -q -r jenkins.zip * -x "vendor/*"
 popd
 
-status "Create Jenkins home $JENKINS_HOME and set JENKINS_HOME env var"
-mkdir -p $JENKINS_HOME
-mkdir -p $TOOLS_HOME
-#echo "export JENKINS_HOME=$JENKINS_HOME" > $build_dir/.profile.d/jenkins.sh
-
-status "Copy Maven config file $MAVEN_CONFIG_SOURCE to $MAVEN_CONFIG_DEST"
-cp $MAVEN_CONFIG_SOURCE $MAVEN_CONFIG_DEST
-chmod 777 $MAVEN_CONFIG_DEST
-
-ls $JENKINS_HOME
-
 # Update the PATH
 status "Building runtime environment."
 # see this script
@@ -64,7 +43,5 @@ status "Building runtime environment."
 mkdir -p $build_dir/.profile.d
 # $HOME is set here https://github.com/cloudfoundry/dea_ng/blob/c2217e5fbcb866c9f4b6fd248b39138a83cbb479/lib/dea/starting/env.rb#L15
 echo "export PATH=\"\$HOME/vendor/jre/bin:\$HOME/bin:\$PATH\";" > $build_dir/.profile.d/jre.sh
-
-echo | ls -all -R $HOME
 
 status "Done."

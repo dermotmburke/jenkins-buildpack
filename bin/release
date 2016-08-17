@@ -1,27 +1,8 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
-build_dir=$1
-
-bp_dir=$(cd $(dirname $0); cd ..; pwd)
-
-source $bp_dir/bin/common.sh
-
-FILES_DIR=$bp_dir/files
-
-TOOLS_HOME=$HOME/tools
-
-JENKINS_HOME=/home/vcap/.jenkins
-
-VENDOR_DIR=$build_dir/vendor
-
-MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
-MAVEN_CONFIG_SOURCE=$TOOLS_HOME/$MAVEN_CONFIG_FILE
-MAVEN_CONFIG_DEST=$JENKINS_HOME/$MAVEN_CONFIG_FILE
-
-
 cat << EOF
 addons: []
 config_vars: []
 default_process_types:
-  web: mkdir $JENKINS_HOME && unzip -o jenkins.zip && cp config/$MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST && java -jar app/jenkins.war --httpPort=\$PORT
+  web: unzip -o jenkins.zip && scripts/init.py && java -jar war/jenkins.war --httpPort=\$PORT
 EOF
