@@ -48,7 +48,7 @@ status "Create Jenkins home $JENKINS_HOME and set JENKINS_HOME env var"
 mkdir -p $JENKINS_HOME
 #echo "export JENKINS_HOME=$JENKINS_HOME" > $build_dir/.profile.d/jenkins.sh
 
-status "Copy Maven config file $MAVEN_CONFIG_FILE to $MAVEN_CONFIG_DEST"
+status "Copy Maven config file $MAVEN_CONFIG_SOURCE to $MAVEN_CONFIG_DEST"
 cp $MAVEN_CONFIG_SOURCE $MAVEN_CONFIG_DEST
 
 ls $JENKINS_HOME
