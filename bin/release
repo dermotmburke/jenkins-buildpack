@@ -1,5 +1,18 @@
 #!/usr/bin/env bash
 # bin/release <build-dir>
+bp_dir=$(cd $(dirname $0); cd ..; pwd)
+
+FILES_DIR=$bp_dir/files
+
+JENKINS_HOME=/home/vcap/.jenkins
+
+MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
+MAVEN_CONFIG_SOURCE=$FILES_DIR/$MAVEN_CONFIG_FILE
+MAVEN_CONFIG_DEST=$JENKINS_HOME/$MAVEN_CONFIG_FILE
+
+status "Copy Maven config file $MAVEN_CONFIG_FILE to $MAVEN_CONFIG_DEST"
+cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
+
 cat << EOF
 addons: []
 config_vars: []
