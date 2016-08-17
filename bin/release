@@ -12,11 +12,9 @@ MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
 MAVEN_CONFIG_SOURCE=$FILES_DIR/$MAVEN_CONFIG_FILE
 MAVEN_CONFIG_DEST=$JENKINS_HOME/$MAVEN_CONFIG_FILE
 
-cp $MAVEN_CONFIG_SOURCE $MAVEN_CONFIG_DEST
-
 cat << EOF
 addons: []
 config_vars: []
 default_process_types:
-  web: java -jar jenkins.war --httpPort=\$PORT
+  web: cp $MAVEN_CONFIG_SOURCE $MAVEN_CONFIG_DEST && java -jar jenkins.war --httpPort=\$PORT
 EOF
