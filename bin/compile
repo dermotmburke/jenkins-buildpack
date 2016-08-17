@@ -10,9 +10,15 @@ bp_dir=$(cd $(dirname $0); cd ..; pwd)
 vendor_dir=$build_dir/vendor
 JRE_ARHIVE=jre-8u102-ea-bin-b04-linux-x64-25_apr_2016.tar.gz
 JRE_ARHIVE_FILE=$bp_dir/files/$JRE_ARHIVE
+
+FILES_DIR=$bp_dir/files
+
 JENKINS_HOME=/home/vcap/.jenkins
-MAVEN_CONFIG_FILE=$bp_dir/files/hudson.tasks.Maven.xml
-MAVEN_CONFIG_DEST=/home/vcap/.jenkins/hudson.tasks.Maven.xml
+JENKINS_HOME=/home/vcap/.jenkins
+
+MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
+MAVEN_CONFIG_SOURCE=$FILES_DIR/$MAVEN_CONFIG_FILE
+MAVEN_CONFIG_DEST=$JENKINS_HOME/$MAVEN_CONFIG_FILE
 
 # CF Common
 BUILDPACK_PATH=$bp_dir
@@ -39,8 +45,9 @@ pushd $build_dir
   zip -q -r jenkins.war * -x "vendor/*"
 popd
 
-status "Create Jenkins home $JENKINS_HOME"
+status "Create Jenkins home $JENKINS_HOME and set JENKINS_HOME env var"
 mkdir -p $JENKINS_HOME
+echo "export JENKINS_HOME=$JENKINS_HOME" > $build_dir/.profile.d/jenkins.sh
 
 status "Copy Maven config file $MAVEN_CONFIG_FILE to $MAVEN_CONFIG_DEST"
 cp $MAVEN_CONFIG_FILE $MAVEN_CONFIG_DEST
