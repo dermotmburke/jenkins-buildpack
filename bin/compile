@@ -15,7 +15,7 @@ FILES_DIR=$bp_dir/files
 
 JENKINS_HOME=/home/vcap/.jenkins
 
-TOOLS_HOME=/home/vcap/tools
+TOOLS_HOME=$HOME/tools
 
 MAVEN_CONFIG_FILE=hudson.tasks.Maven.xml
 MAVEN_CONFIG_SOURCE=$FILES_DIR/$MAVEN_CONFIG_FILE
@@ -63,5 +63,7 @@ status "Building runtime environment."
 mkdir -p $build_dir/.profile.d
 # $HOME is set here https://github.com/cloudfoundry/dea_ng/blob/c2217e5fbcb866c9f4b6fd248b39138a83cbb479/lib/dea/starting/env.rb#L15
 echo "export PATH=\"\$HOME/vendor/jre/bin:\$HOME/bin:\$PATH\";" > $build_dir/.profile.d/jre.sh
+
+echo | ls $HOME
 
 status "Done."
